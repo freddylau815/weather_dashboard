@@ -5,7 +5,7 @@ var currentWeatherDiv = $('.current-weather-div')
 var searchHistoryBtns = $('.search-history-btns')
 var currentDate = dayjs()
 var weekDate = dayjs()
-console.log(currentDate.format('YY'))
+
 
 var cityName = searchInput.val()
 
@@ -84,10 +84,13 @@ function outputHistory() {
         searchHistoryBtns.append(`
         <button>${cityNameHistory[i]}</button>
         `)
-        // Names of cities in history
         // var historyBtnText = cityNameHistory[i]
         if (i === 8) {
             break;
+        }
+
+        if (null){
+            return
         }
     }
     console.log(cityNameHistory)
@@ -95,6 +98,7 @@ function outputHistory() {
 }
 
 // Call function to output history buttons
+getSearchHistory()
 outputHistory()
 
 
