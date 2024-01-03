@@ -1,0 +1,21 @@
+:root {
+    --primary-color: #3439cb;
+    --secondary-color: #6829ef;
+    --accent-color: white;
+    --extra-color: #23222f;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+main {
+    flex: 1;
+}

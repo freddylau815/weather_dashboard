@@ -1,0 +1,52 @@
+.row {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;   
+}
+
+.text-center {
+    text-align: center;
+}
+
+button {
+    padding: 4px 0;
+    border: none;
+    border-radius: 3px;
+}
+
+header {
+    height: 32px;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+header h1 {
+    font-size: 28px;
+    text-align: center;
+}
+
+.search-section {
+    width: 250px;
+}
+
+.search-section * {
+    margin: 3px 6px;
+}
+
+#search-btn {
+    color: white;
+    background-color: rgb(81, 159, 242);
+
+}

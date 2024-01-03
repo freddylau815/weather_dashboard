@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/resets.css">
+    <link rel="stylesheet" href="./assets/stylesheet.css">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    
+    <header class="row align-center justify-center">
+        <h1 class="text-center">Weather Dashboard</h1>
+    </header>
+   
+    <div class="row">
+        <section class="search-section column">
+            <h2>Search for a City:</h2>
+            <input id="search-input" type="text" placeholder="Please enter a city name">
+            <button id="search-btn">Search</button>
+            <hr>
+            <div class="search-history-btns column"></div>
+        </section>
+
+        <section class="weather-section">
+            <div class="current-weather-div column"></div>
+            <div class="forcast-div">
+
+               </div>
+                <h3>5-Day Forecast:</h3>
+                <div class="forecast-cards row">
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script>dayjs().format()</script>
+    
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
