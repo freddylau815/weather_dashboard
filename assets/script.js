@@ -2,22 +2,26 @@ var searchInput = $('#search-input')
 var searchBtn = $('#search-btn')
 var forcastCardsDiv = $('.forecast-cards')
 var currentWeatherDiv = $('.current-weather-div')
-var searchHistoryBtns = $('.search-history-btns')
+var searchHistoryBtnsDiv = $('.search-history-btns')
+var searchHistoryBtns = $('.history-btn')
+
 var currentDate = dayjs()
 var weekDate = dayjs()
-
-
-var cityName = searchInput.val()
 
 var apiKey = '95034a892cd8054a8bdfbc0bb94fcc69'
 var currentURL = `https://api.openweathermap.org/data/2.5/weather?&appid=${apiKey}&units=imperial`
 var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?&appid=${apiKey}&units=imperial`
 
 // Function to output weather data to DOM
-function weatherOutput() {
-    var cityName = searchInput.val()
-    $.get(forecastURL + `&q=${cityName}`)
+function weatherOutput(city) {
+     if(city === "" || !city) {
+        console.log('no city')
+        return
+     }
+
+    $.get(forecastURL + `&q=${city}`)
         .then(function (data) {
+            console.log(data)
             var blocks = data.list;
             for (var i = 0; i < blocks.length; i++) {
                 var blockObj = blocks[i]
@@ -39,7 +43,7 @@ function weatherOutput() {
             }
         });
 
-    $.get(currentURL + `&q=${cityName}`)
+    $.get(currentURL + `&q=${city}`)
         .then(function (data) {
             var temp = data.main.temp
             var wind = data.wind.speed
@@ -61,40 +65,55 @@ function getSearchHistory() {
     return history
 }
 
-function getWeather() {
+function getWeather(event) {
+    var target = event.target;
+    var city = undefined;
+
+    // Finds which event is happening search or history
+    if(target.id === 'search-btn') {
+        city = searchInput.val();
+    }
+    else {
+        // convert to jquery
+        city = $(target).text()
+    }
+    
     var history = getSearchHistory()
     // 2. Console logging getSearchHistoryFunction 4. rawData or empty array gets logged 
-    // console.log(cityName)
+    console.log(city)
     // If history doesn't include city name save it local storage
-    if (!history.includes(cityName)) {
+    if (!history.includes(city)) {
         // Add the city to the history array
-        history.push(cityName)
+        history.push(city)
         // Replace the old history array in local with the new array
         localStorage.setItem('search-history', JSON.stringify(history))
     }
-    // Make a function that retrieves search history (min. 32)
-    weatherOutput()
+    // Weather output function called with city 
+    weatherOutput(city)
 }
 
 // Function that outputs history as buttons
 function outputHistory() {
     var cityNameHistory = JSON.parse(localStorage.getItem('search-history'))
-
+    // If there is nothing in history it returns value and for loop doesn't 
+    if(cityNameHistory === null) {
+        console.log('No city search history')
+        return
+     }
+     console.log(cityNameHistory)
     for (i = 0; i < cityNameHistory.length; i++) {
-        searchHistoryBtns.append(`
-        <button>${cityNameHistory[i]}</button>
+        searchHistoryBtnsDiv.append(`
+        <button class="history-btn">${cityNameHistory[i]}</button>
         `)
-        // var historyBtnText = cityNameHistory[i]
+        var searchHistoryBtns = $('.history-btn')
+        console.log(searchHistoryBtns.text())
+     
         if (i === 8) {
             break;
         }
-
-        if (null){
-            return
-        }
     }
-    console.log(cityNameHistory)
-    // console.log(historyBtnText)
+
+    historySearch()
 }
 
 // Call function to output history buttons
@@ -104,7 +123,12 @@ outputHistory()
 
 // 1. Click activates getWeather function
 searchBtn.click(getWeather)
-searchHistoryBtns.on('click', 'button', getWeather)
+function historySearch() {
+searchHistoryBtns.on('click', '.history-btn', getWeather)
+}
 
+function test() {
+    console.log('search history button')
+}
 
 
